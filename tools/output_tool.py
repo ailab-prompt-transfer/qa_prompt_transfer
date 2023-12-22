@@ -18,17 +18,6 @@ def null_output_function(data, config, *args, **params):
     return ""
 
 
-def rouge_output_function(data, config, *args, **params):
-    if data["rouge1"] == 0:
-        return 0
-    else:
-        return json.dumps(
-            {
-                "rouge1": round((data["rouge1"] / data["total_cnt"] * 100), 4),
-                "rouge2": round((data["rouge2"] / data["total_cnt"] * 100), 4),
-                "rougeL": round((data["rougeL"] / data["total_cnt"] * 100), 4),
-            }
-        )
 
 
 def acc_output_function(data, config, *args, **params):

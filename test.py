@@ -83,13 +83,7 @@ if __name__ == "__main__":
     ]
 
     print(f"test_result: {test_result}")
-    if "samsum" in config.get("data", "test_dataset_type") or "multi_news" in config.get("data", "test_dataset_type"):
-        test_rouge1 = (test_result["rouge1"] / test_result["total_cnt"]) * 100
-        test_rouge2 = (test_result["rouge2"] / test_result["total_cnt"]) * 100
-        test_rougeL = (test_result["rougeL"] / test_result["total_cnt"]) * 100
-
-        print("rouge1: %.6f, rouge2: %.6f, rougeL: %.6f" % (test_rouge1, test_rouge2, test_rougeL))
-    elif cur_dataset_name in qa_datasets:
+    if cur_dataset_name in qa_datasets:
         test_f1 = (test_result["f1"] / test_result["total_cnt"]) * 100
         test_em = (test_result["em"] / test_result["total_cnt"]) * 100
 

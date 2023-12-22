@@ -1,4 +1,4 @@
-from .output_tool import f1_em_output_funtion, rouge_output_function, basic_output_function, null_output_function, output_function1, acc_output_function, pearson_output_function
+from .output_tool import f1_em_output_funtion, basic_output_function, null_output_function, output_function1, acc_output_function, pearson_output_function
 
 output_function_dic = {
     "Basic": basic_output_function,
@@ -6,7 +6,6 @@ output_function_dic = {
     "out1": output_function1,
     "acc": acc_output_function,
     "pearson": pearson_output_function,
-    "rouge": rouge_output_function,
     "f1_em": f1_em_output_funtion,
 }
 

@@ -12,7 +12,6 @@ from transformers import T5Tokenizer
 
 import collections
 
-from compare_mt.rouge.rouge_scorer import RougeScorer
 import re
 import string
 
@@ -114,11 +113,7 @@ class PromptT5(nn.Module):
 
                     # print('현재 prompt params')
                     # print(self.encoder.prompt_embeddings.weight.data)
-
-                    if "samsum" in config.get("data", "train_dataset_type") or "multi_news" in config.get("data", "train_dataset_type"):
-                        performance = train_rouge(gen["sequences"], data["text_label"], config.get("data", "train_dataset_type"), self.model)
-                    else:
-                        performance = train_f1_em(gen["sequences"], data["text_label"], self.model)
+                    performance = train_f1_em(gen["sequences"], data["text_label"], self.model)
 
                 return {"loss": output["loss"], "performance": performance}
         # elif mode == 'valid':
@@ -139,16 +134,13 @@ class PromptT5(nn.Module):
                     no_repeat_ngram_size=config.getint("eval", "no_repeat_ngram_size"),
                 )
 
-                if "samsum" in config.get("data", "train_dataset_type") or "multi_news" in config.get("data", "train_dataset_type"):
-                    acc_result = cal_rouge(output["sequences"], data["label"], acc_result, self.model)
-                else:
-                    acc_result = calc_f1_em(output["sequences"], data["label"], acc_result, self.model)
+                acc_result = calc_f1_em(output["sequences"], data["label"], acc_result, self.model)
             return {"acc_result": acc_result}
 
 
 #########################################################################################################
 #########################################################################################################
-# 코드 참고 : https://github.com/google-research/albert/blob/b772393d3dae115b493258ce8e37c17b2cc62100/squad_utils.py#L1129
+# reference : https://github.com/google-research/albert/blob/b772393d3dae115b493258ce8e37c17b2cc62100/squad_utils.py#L1129
 # 동일한 코드른 다른 모델들도 사용하는 것 같았음
 
 
@@ -174,7 +166,7 @@ def train_f1_em(summary, reference, model):
         f1 += compute_f1(hyp, ref)
         cnt += 1
 
-    result = f1 / cnt * 100  # performance에 f1 score 찍힘
+    result = f1 / cnt * 100  # performance : f1 score 
     return result
 
 
@@ -257,59 +249,3 @@ def compute_f1(hyp, ref):
 
 def compute_em(hyp, ref):
     return int(normalize_answer_v2(hyp) == normalize_answer_v2(ref))
-
-
-#########################################################################################################
-#########################################################################################################
-
-
-def train_rouge(summary, reference, dataset, model):
-    tokenizer = T5Tokenizer.from_pretrained(model)
-    rouge_scorer = RougeScorer(["rouge1", "rouge2", "rougeLsum"], use_stemmer=True)
-
-    rouge1, rouge2, rougeLsum = 0, 0, 0
-    cnt = 0
-
-    for i in range(len(summary)):
-        hyp = tokenizer.decode(summary[i], skip_special_tokens=True)
-        ref = reference[i]
-
-        scores = rouge_scorer.score(ref, hyp)
-        rouge1 += scores["rouge1"].fmeasure
-        rouge2 += scores["rouge2"].fmeasure
-        rougeLsum += scores["rougeLsum"].fmeasure
-        cnt += 1
-
-    # check valid
-    avg_rouge = (rouge1 + rouge2 + rougeLsum) / cnt * 100 / 3.0
-    return avg_rouge  # Performance = avg rouge
-
-
-def cal_rouge(summary, reference, acc_result, model):
-    tokenizer = T5Tokenizer.from_pretrained(model)
-    rouge_scorer = RougeScorer(["rouge1", "rouge2", "rougeLsum"], use_stemmer=True)
-    rouge1, rouge2, rougeLsum = 0, 0, 0
-    cnt = 0
-
-    if acc_result is None:
-        acc_result = {"rouge1": 0, "rouge2": 0, "rougeL": 0, "total_cnt": 0}
-
-    for i in range(len(summary)):
-        hyp = tokenizer.decode(summary[i], skip_special_tokens=True)
-        ref = reference[i]
-
-        # print(f'hyp: {hyp}')
-        # print(f'ref: {ref}', end='\n\n')
-
-        scores = rouge_scorer.score(ref, hyp)
-        rouge1 += scores["rouge1"].fmeasure
-        rouge2 += scores["rouge2"].fmeasure
-        rougeLsum += scores["rougeLsum"].fmeasure
-        cnt += 1
-
-    acc_result["rouge1"] += rouge1
-    acc_result["rouge2"] += rouge2
-    acc_result["rougeL"] += rougeLsum
-    acc_result["total_cnt"] += cnt
-
-    return acc_result
