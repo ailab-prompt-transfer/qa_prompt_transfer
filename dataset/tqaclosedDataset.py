@@ -11,7 +11,7 @@ class tqaclosedDataset(Dataset):
         self.mode = mode
         self.data = load_dataset("trivia_qa", "unfiltered.nocontext")
 
-        # train : valid = 9:1 로 split
+        # train : valid = 9:1 split
         TRAIN_LEN = len(self.data["train"])
         TQA_TRAIN_SPLIT_END = int(TRAIN_LEN * 0.9)
 

@@ -8,7 +8,7 @@ class cosmos_qaclosedDataset(Dataset):
         self.mode = mode
         self.data = load_dataset("cosmos_qa")
 
-        # train : valid = 9:1 로 split
+        # train : valid = 9:1 split
         TRAIN_LEN = len(self.data["train"])
         COSMOS_TRAIN_SPLIT_END = int(TRAIN_LEN * 0.9)
 

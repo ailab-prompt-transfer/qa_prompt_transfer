@@ -8,7 +8,7 @@ class social_i_qaclosedDataset(Dataset):
         self.mode = mode
         self.data = load_dataset("social_i_qa")
 
-        # train : valid = 9:1 로 split
+        # train : valid = 9:1 split
         TRAIN_LEN = len(self.data["train"])
         SOCIAL_I_QA_TRAIN_SPLIT_END = int(TRAIN_LEN * 0.9)
 

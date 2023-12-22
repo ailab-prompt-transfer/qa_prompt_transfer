@@ -11,7 +11,7 @@ class nq_openDataset(Dataset):
         self.mode = mode
         self.data = load_dataset("nq_open")
 
-        # train : valid = 9:1 로 split
+        # train : valid = 9:1 split
         TRAIN_LEN = len(self.data["train"])
         NQ_TRAIN_SPLIT_END = int(TRAIN_LEN * 0.9)
 
