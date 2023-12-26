@@ -14,9 +14,6 @@
 ```
 bash scripts/train.sh
 ```
-#### Trained prompt path
-* **Original PT(실험 1-0)** : model/`{target task}`T5Small/exp_date
-* **Transferring initialization PT(실험 1-2)** : model/exp1_2/`{target task}`T5Small/`{source task}`/exp_date
 
 ### Evaluate
 #### best_model.pkl 테스트하는법
