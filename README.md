@@ -48,12 +48,6 @@ bash scripts/run_evaluate.sh
 ```
 <br>
 
-### epoch_?.pkl 모델 중 best checkpoint 기록 얻는법
-- 모든 epoch에서 저장한 pkl model에 대한 EM/F1 score 얻기
-- 상세 설명은 `pick_best_epoch_QA.py`에 있음
-```python
-CUDA_VISIBLE_DEVICES=0 python pick_best_epoch_QA.py --gpu=0 --config=[config 세팅] --ckpt_path=[내가 Test하고자하는 모델 폴더 경로] --output_file=[파일 출력 이름]
-```
 
 ## Results (Will be Updated!)
 # qa_prompt_transfer
