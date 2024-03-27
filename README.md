@@ -10,7 +10,7 @@ We study the effectiveness of prompt transfer in Question Answering(QA) tasks. W
 
 ### Setups
 ```
-docker pull
+docker pull ssoyaavv/pot
 ```
 
 ### How to Run
