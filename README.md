@@ -99,9 +99,4 @@ CUDA_VISIBLE_DEVICES=$gpus python3 test.py
     --replacing_prompt $MODEL_PATH \
 ```
 
-
-
-
-
-## Results (Will be Updated!)
-# qa_prompt_transfer
+# Citations
