@@ -16,7 +16,7 @@ docker pull ssoyaavv/pot
 
 ### How to Run
 
-#### Train
+#### Training
 ```
 bash scripts/run_train.sh
 ```
