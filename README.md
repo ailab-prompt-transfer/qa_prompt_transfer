@@ -1,5 +1,5 @@
 # Is Prompt Transfer Always Effective? An Empirical Study of Prompt Transfer for Question Answering
-Out work is accepted to NAACL 2024🎇
+Our work is accepted to NAACL 2024🎇
 
 This repository include the code for our paper "Is Prompt Transfer Always Effective? An Empirical Study of Prompt Transfer for Question Answering (NAACL short, 2024)."
 
