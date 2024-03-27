@@ -14,7 +14,9 @@ Pull an image from a registry:
 docker pull ssoyaavv/pot
 ```
 
-### How to Run
+# How to Run
+
+### Train
 ```
 bash scripts/run_train.sh
 ```
