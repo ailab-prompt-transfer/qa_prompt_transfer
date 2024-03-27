@@ -9,6 +9,7 @@ We study the effectiveness of prompt transfer in Question Answering(QA) tasks. W
 ## Description of Codes
 
 ### Setups
+Pull an image from a registry:
 ```
 docker pull ssoyaavv/pot
 ```
