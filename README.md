@@ -14,13 +14,13 @@ Pull an image from a registry:
 docker pull ssoyaavv/pot
 ```
 
-# How to Run
+### How to Run
 
-### Train
+#### Train
 ```
 bash scripts/run_train.sh
 ```
-#### Example: VanillaPT 
+##### Example: VanillaPT 
 ```
 # !/bin/sh
 # mkdir OPTForCausalLM
@@ -45,7 +45,7 @@ CUDA_VISIBLE_DEVICES=$gpus python3 train.py
     --wandb_proj $WANDB_PROJ \
     --wandb_run $WANDB_RUN  \
 ```
-#### Example: PoT 
+##### Example: PoT 
 ```
 # !/bin/sh
 # mkdir OPTForCausalLM
@@ -76,11 +76,11 @@ CUDA_VISIBLE_DEVICES=$gpus python3 train.py
 
 ```
 
-### Evaluate
+#### Evaluate
 ```
 bash scripts/test.sh
 ```
-#### Example
+##### Example
 ```
 gpus=0
 
