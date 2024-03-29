@@ -71,7 +71,6 @@ def single_label_top1_accuracy(outputs, label, config, result=None):
     if result is None:
         result = []
     id1 = torch.max(outputs, dim=1)[1]
-    # id2 = torch.max(label, dim=1)[1]
     id2 = label
     nr_classes = outputs.size(1)
     while len(result) < nr_classes:
@@ -120,10 +119,6 @@ def multi_label_accuracy(outputs, label, config, result=None):
 
         if result is None:
             continue
-
-        # if len(result) < i:
-        #    result.append({"TP": 0, "FN": 0, "FP": 0, "TN": 0})
-
         result[i]["TP"] += int((labels1 * outputs1).sum())
         result[i]["FN"] += int((labels1 * (1 - outputs1)).sum())
         result[i]["FP"] += int(((1 - labels1) * outputs1).sum())
@@ -146,9 +141,6 @@ def single_label_top2_accuracy(outputs, label, config, result=None):
     while len(result) < nr_classes:
         result.append({"TP": 0, "FN": 0, "FP": 0, "TN": 0})
     for a in range(0, len(id1)):
-        # if len(result) < a:
-        #    result.append({"TP": 0, "FN": 0, "FP": 0, "TN": 0})
-
         it_is = int(id1[a])
         should_be = int(id2[a])
         if it_is == should_be:
