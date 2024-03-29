@@ -10,8 +10,6 @@ def get_params_for_prompt_optimization(module: torch.nn.Module):
         if "prompt" in t[0]:
             params.append({"params": [p for p in list(t[1]._parameters.values()) if p is not None]})
 
-    # if torch.distributed.get_rank() == 0:
-    #     print("print params", params)
     return params
 
 
