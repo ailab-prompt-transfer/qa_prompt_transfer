@@ -122,7 +122,6 @@ def train(parameters, config, gpu_list, do_test=False, local_rank=-1, *args, **k
     best_valid_F1 = 0
     best_valid_loss = 10000
 
-    # 소연 테스트
     early_stop_cnt = 0  # 현재 몇번이나 갱신되지 않았는가?
 
     for epoch_num in range(trained_epoch, epoch):
@@ -249,17 +248,6 @@ def train(parameters, config, gpu_list, do_test=False, local_rank=-1, *args, **k
                 print(f"valid_result : {valid_result}")
 
                 if local_rank <= 0:
-                    # BEFORE using Valid Loss
-                    # valid_loss = valid_result['avg_valid_loss']
-                    # print(f'({current_epoch} epoch) Valid Performance: {valid_loss}')
-
-                    # wandb.log({'valid_loss': valid_loss})
-                    # if valid_loss < best_valid_loss:
-                    #     print(f'({current_epoch} epoch) BEST Valid Performance: {valid_loss} < {best_valid_loss}')
-
-                    #     best_valid_loss = valid_loss
-                    #     checkpoint(os.path.join(output_path, "best_%d_epoch.pkl" % current_epoch), model, optimizer, current_epoch, config, global_step)
-
                     # AFTER using F1 score for validation
                     cur_dataset_name = config.get("data", "train_dataset_type")
                     qa_datasets = [
@@ -288,7 +276,7 @@ def train(parameters, config, gpu_list, do_test=False, local_rank=-1, *args, **k
                         wandb.log({"valid_F1": valid_f1, "valid_EM": valid_em})
                         print("Epoch: %d, F1: %.6f, EM: %.6f" % (current_epoch, valid_f1, valid_em))
 
-                        # 소연 test / early stopping
+                        # early stopping
                         if valid_f1 > best_valid_F1:
                             early_stop_cnt = 0
                         else:
@@ -303,9 +291,7 @@ def train(parameters, config, gpu_list, do_test=False, local_rank=-1, *args, **k
                     test_result = valid(model, test_dataset, current_epoch, writer, config, gpu_list, output_function, mode="test", local_rank=local_rank)
                     print(f"test: {test_result}")
 
-            # 소연 test
             if early_stopping(kwargs.early_stop, early_stop_cnt):
                 break
 
-        # if local_rank >= 0:
-        #     torch.distributed.barrier()
+
