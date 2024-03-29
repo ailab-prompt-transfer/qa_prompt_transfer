@@ -103,3 +103,4 @@ CUDA_VISIBLE_DEVICES=$gpus python3 test.py
 ```
 
 # Citations
+Please cite our paper if you use our analysis in your work: 
