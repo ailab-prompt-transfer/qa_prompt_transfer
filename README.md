@@ -104,3 +104,23 @@ CUDA_VISIBLE_DEVICES=$gpus python3 test.py
 
 # Citations
 Please cite our paper if you use our analysis in your work: 
+```
+@inproceedings{jung-etal-2024-prompt,
+    title = "Is Prompt Transfer Always Effective? An Empirical Study of Prompt Transfer for Question Answering",
+    author = "Jung, Minji  and
+      Park, Soyeon  and
+      Sul, Jeewoo  and
+      Choi, Yong Suk",
+    editor = "Duh, Kevin  and
+      Gomez, Helena  and
+      Bethard, Steven",
+    booktitle = "Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 2: Short Papers)",
+    month = jun,
+    year = "2024",
+    address = "Mexico City, Mexico",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.naacl-short.44",
+    pages = "528--539",
+    abstract = "Prompt tuning, which freezes all parameters of a pre-trained model and only trains a soft prompt, has emerged as a parameter-efficient approach. For the reason that the prompt initialization becomes sensitive when the model size is small, the prompt transfer that uses the trained prompt as an initialization for the target task has recently been introduced. Since previous works have compared tasks in large categories (e.g., summarization, sentiment analysis), the factors that influence prompt transfer have not been sufficiently explored. In this paper, we characterize the question answering task based on features such as answer format and empirically investigate the transferability of soft prompts for the first time. We analyze the impact of initialization during prompt transfer and find that the train dataset size of source and target tasks have the influence significantly. Furthermore, we propose a novel approach for measuring catastrophic forgetting and investigate how it occurs in terms of the amount of evidence. Our findings can help deeply understand transfer learning in prompt tuning.",
+}
+```
