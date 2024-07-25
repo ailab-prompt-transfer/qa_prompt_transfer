@@ -1,7 +1,7 @@
 # Is Prompt Transfer Always Effective? An Empirical Study of Prompt Transfer for Question Answering
 Our work is accepted to NAACL 2024🎇
 
-This repository include the code for our paper "Is Prompt Transfer Always Effective? An Empirical Study of Prompt Transfer for Question Answering (NAACL short, 2024)."
+This repository include the code for our paper "[Is Prompt Transfer Always Effective? An Empirical Study of Prompt Transfer for Question Answering (NAACL short, 2024)](https://aclanthology.org/2024.naacl-short.44/)."
 
 # Overview
 We study the effectiveness of prompt transfer in Question Answering(QA) tasks. We characterize the QA task based on features and empirically investigate the impact of various factors on the performance of PoT using 16 QA datasets. We analyze the impact of initialization during prompt transfer and find that the train dataset size of source and target tasks have the influence significantly. Furthermore, we propose a novel approach for measuring catastrophic forgetting and investigate how it occurs in terms of the amount of evidence. Our findings can help deeply understand transfer learning in prompt tuning.
